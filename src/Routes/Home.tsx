@@ -16,7 +16,7 @@ const Loader = styled.div`
   align-items: center;
 `;
 
-const Banner = styled.div<{ bgPhoto: string }>`
+const Banner = styled(motion.div)<{ bgPhoto: string }>`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -48,13 +48,15 @@ const Row = styled(motion.div)`
   grid-template-columns: repeat(6, 1fr);
   position: absolute;
   width: 100%;
+  top: -60px;
 `;
 
 const Box = styled(motion.div)<{ bgPhoto: string }>`
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
     url(${(props) => props.bgPhoto});
-  background-size: contain;
-  height: 200px;
+  background-size: cover;
+  background-position: 50% 50%;
+  height: 150px;
   color: red;
   font-size: 66px;
 `;
@@ -85,7 +87,7 @@ function Home() {
                 <Loader>Loading...</Loader>
                 ) : (
                 <>
-                    <Banner
+                    <Banner 
                     onClick={incraseIndex}
                     bgPhoto={makeImagePath(data?.results[index].backdrop_path || "")}
                     >
@@ -102,8 +104,8 @@ function Home() {
                             transition={{ type: "tween", duration: 1 }}
                             key={index}
                             >
-                            {[1, 2, 3, 4, 5, 6].map((i) => (
-                                <Box key={i} bgPhoto={makeImagePath(data?.results[i].backdrop_path || "")}>{i}</Box>
+                            {data?.results.map((movie) => (
+                                <Box key={movie.id} bgPhoto={makeImagePath(movie.backdrop_path || "")} />
                             ))}
                             </Row>
                         </AnimatePresence>
