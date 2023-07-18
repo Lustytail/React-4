@@ -4,6 +4,7 @@ import App from './App';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
 import {RecoilRoot} from "recoil";
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const Globalstyle = createGlobalStyle`
 
@@ -63,8 +64,8 @@ table {
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
-  background-color: ${props => props.theme.bgColor};
-  color: ${props => props.theme.textColor};
+  background-color: black;
+  color: ${props => props.theme.white.darker};
   accent-color: ${props => props.theme.accentColor};
 }
 
@@ -74,16 +75,20 @@ a {
 }
 `;
 
+const client = new QueryClient();
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <>
     <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <Globalstyle />
-        <App />
-      </ThemeProvider>
+      <QueryClientProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <Globalstyle />
+          <App />
+        </ThemeProvider>
+      </QueryClientProvider>
     </RecoilRoot>
   </>
 );
