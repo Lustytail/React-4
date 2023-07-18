@@ -81,8 +81,8 @@ const Search = styled.span`
 `;
 
 function Header() {
-  const homeMatch = useMatch("/");
-  const tvMatch = useMatch("tv");
+  const homeMatch = useMatch("React-4/");
+  const tvMatch = useMatch("React-4/tv");
 
   return (
     <Nav>
@@ -97,12 +97,12 @@ function Header() {
         </Logo>
         <Items>
           <Item>
-            <Link to="/">
+            <Link to="React-4/">
               Home { homeMatch &&<Circle layoutId="selctMenu"/>}
             </Link>
           </Item>
           <Item>
-            <Link to="/tv">
+            <Link to="React-4/tv">
               Tv Shows { tvMatch && <Circle layoutId="selctMenu"/> }
             </Link>
           </Item>
